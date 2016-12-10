@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Puns</title>
+
+    <style>
+        body {
+            background-color: black;
+            background-image: url("james.jpg");
+            background-repeat: no-repeat;
+            background-position: center top;
+        }
+
+        #pun-spot {
+            font-weight: bold;
+            text-shadow:
+                    -1px -1px 0 white,
+                    1px -1px 0 white,
+                    -1px 1px 0 white,
+                    1px 1px 0 white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1 id="pun-spot"></h1>
+
+<script src="js/jquery.min.js"></script>
+<script>
+    document.getElementById("pun-spot").innerHTML = "Puns!";
+
+    $.get("puns", function(data) {
+        var items = data.split('\n');
+        document.getElementById("pun-spot").innerHTML = "Puns!";
+
+        var i = 0;
+        function f() {
+            document.getElementById("pun-spot").innerHTML = items[(i%data.length)];
+            i++;
+            if( i < items.length ){
+                setTimeout( f, 20000 );
+            }
+        }
+        f();
+    });
+</script>
+</body>
+</html>
